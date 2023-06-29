@@ -32,6 +32,11 @@ class LocalAuth extends BaseAuthStrategy {
             throw new Error('LocalAuth is not compatible with a user-supplied userDataDir.');
         }
 
+        this.isNewClient = true;
+        if (fs.existsSync(dirPath)) {
+            this.isNewClient = false;
+        }
+        
         fs.mkdirSync(dirPath, { recursive: true });
         
         this.client.options.puppeteer = {
@@ -48,6 +53,13 @@ class LocalAuth extends BaseAuthStrategy {
         }
     }
 
+    async onAuthenticationNeeded() {
+        return {
+            failed: !this.isNewClient,
+            restart: false,
+            failureEventPayload: undefined
+        };
+    }
 }
 
 module.exports = LocalAuth;
