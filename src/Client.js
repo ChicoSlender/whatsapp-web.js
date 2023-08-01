@@ -117,6 +117,8 @@ class Client extends EventEmitter {
         this.pupBrowser = browser;
         this.pupPage = page;
 
+        this.emit(Events.BROWSER_INIT);
+
         await this.authStrategy.afterBrowserInitialized();
         await this.initWebVersionCache();
 
@@ -129,7 +131,7 @@ class Client extends EventEmitter {
         await page.evaluate(`function getElementByXpath(path) {
             return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           }`);
-
+        
         let lastPercent = null,
             lastPercentMessage = null;
 
@@ -140,6 +142,7 @@ class Client extends EventEmitter {
                 lastPercentMessage = message;
             }
         });
+
 
         await page.evaluate(
             async function (selectors) {
