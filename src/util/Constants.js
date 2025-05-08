@@ -7,7 +7,7 @@ exports.DefaultOptions = {
         headless: true,
         defaultViewport: null
     },
-    webVersion: '2.2346.52',
+    webVersion: '2.3000.1017054665',
     webVersionCache: {
         type: 'local',
     },
@@ -66,7 +66,7 @@ exports.Events = {
     BATTERY_CHANGED: 'change_battery',
     INCOMING_CALL: 'call',
     REMOTE_SESSION_SAVED: 'remote_session_saved',
-    BROWSER_INIT: 'browser_init',
+    VOTE_UPDATE: 'vote_update'
 };
 
 /**
