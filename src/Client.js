@@ -303,6 +303,8 @@ class Client extends EventEmitter {
         this.pupBrowser = browser;
         this.pupPage = page;
 
+        this.emit(Events.BROWSER_INIT);
+
         await this.authStrategy.afterBrowserInitialized();
         await this.initWebVersionCache();
 
